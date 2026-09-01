@@ -1,0 +1,21 @@
+{
+  "id": "bpxRobot",
+  "version": "0.1.2",
+  "name": {
+    "zh-cn": "BPX 机器人",
+    "en": "BPX Robot"
+  },
+  "description": {
+    "zh-cn": "通过 Python 积木连接、控制 BPX 四足机器人并读取状态",
+    "en": "Connect to, control, and read state from a BPX quadruped using Python blocks"
+  },
+  "author": "mirrormerobotics",
+  "cover": "cover.png",
+  "main": "main.js",
+  "isDevice": false,
+  "sku": "BPX",
+  "mode": "python-block",
+  "meta": {
+    "runtimeVersion": "0.0.1"
+  }
+}
