@@ -1,0 +1,27 @@
+name: Configure BPX SDK submodule
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  configure-submodule:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Add BPX SDK as a submodule
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git submodule add https://github.com/mirrormerobotics/bpx_sdk_open.git libraries/bpx_sdk_open
+          git rm .github/workflows/setup-bpx-sdk-submodule.yml
+          git add .gitmodules libraries/bpx_sdk_open
+          git commit -m "Add BPX SDK as a submodule"
+          git push
