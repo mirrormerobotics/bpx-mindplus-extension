@@ -34,7 +34,7 @@
 
 ## 四、加载 BPX Python 积木扩展
 
-1. 下载并解压 [BPX-MindPlus-extension-v0.1.2-mirrormerobotics-win-cp38-cp314.zip](releases/BPX-MindPlus-extension-v0.1.2-mirrormerobotics-win-cp38-cp314.zip)。
+1. 从 [v0.1.2 Release](https://github.com/mirrormerobotics/bpx-mindplus-extension/releases/tag/v0.1.2) 下载并解压 `BPX-MindPlus-extension-v0.1.2-mirrormerobotics-win-cp38-cp314.zip`。
 2. 在扩展页面左下角点击“加载测试扩展”。
 3. 选择解压目录中的 `config.json`。
 4. 加载成功后，扩展页面会出现带“测试”标志的“BPX机器人”卡片。
@@ -79,7 +79,7 @@ Python主程序开始
 5. 打开左侧“控制”分类。
 6. 拖出“循环执行”，连接到“连接 BPX”下面。
 7. 找到“打印”积木，放进循环里。
-8. 从“BPX机器人”分类拖出椭圆形的“BPX 电量（%）”，把它放入“打印”积木的输入桀。
+8. 从“BPX机器人”分类拖出椭圆形的“BPX 电量（%）”，把它放入“打印”积木的输入框。
 9. 从“控制”分类拖出“等待 1 秒”，放在打印积木下面。
 
 ## 七、运行并查看结果
