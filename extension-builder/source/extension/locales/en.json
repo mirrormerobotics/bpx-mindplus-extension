@@ -1,0 +1,21 @@
+{
+  "ext.bpx.name": "BPX Robot",
+  "bpx.connect": "connect BPX at [IP]",
+  "bpx.isConnected": "BPX connected?",
+  "bpx.disconnect": "disconnect BPX",
+  "bpx.standUp": "BPX stand up",
+  "bpx.sitDown": "BPX sit down",
+  "bpx.damping": "BPX damping mode",
+  "bpx.walkGait": "BPX use walking gait",
+  "bpx.runningGait": "BPX use running gait",
+  "bpx.paceGait": "BPX use pace gait",
+  "bpx.boundGait": "BPX use bound gait",
+  "bpx.setVelocity": "BPX velocity forward [X] lateral [Y] yaw [YAW]",
+  "bpx.stop": "BPX stop moving",
+  "bpx.batteryLevel": "BPX battery level (%)",
+  "bpx.imuRoll": "BPX IMU roll",
+  "bpx.imuPitch": "BPX IMU pitch",
+  "bpx.imuYaw": "BPX IMU yaw",
+  "bpx.motionState": "BPX motion state",
+  "bpx.currentGait": "BPX current gait"
+}

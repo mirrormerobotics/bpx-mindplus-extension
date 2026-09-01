@@ -1,0 +1,45 @@
+// GENERATED FILE:
+export default {
+  "en": {
+    "ext.bpx.name": "BPX Robot",
+    "bpx.connect": "connect BPX at [IP]",
+    "bpx.isConnected": "BPX connected?",
+    "bpx.disconnect": "disconnect BPX",
+    "bpx.standUp": "BPX stand up",
+    "bpx.sitDown": "BPX sit down",
+    "bpx.damping": "BPX damping mode",
+    "bpx.walkGait": "BPX use walking gait",
+    "bpx.runningGait": "BPX use running gait",
+    "bpx.paceGait": "BPX use pace gait",
+    "bpx.boundGait": "BPX use bound gait",
+    "bpx.setVelocity": "BPX velocity forward [X] lateral [Y] yaw [YAW]",
+    "bpx.stop": "BPX stop moving",
+    "bpx.batteryLevel": "BPX battery level (%)",
+    "bpx.imuRoll": "BPX IMU roll",
+    "bpx.imuPitch": "BPX IMU pitch",
+    "bpx.imuYaw": "BPX IMU yaw",
+    "bpx.motionState": "BPX motion state",
+    "bpx.currentGait": "BPX current gait"
+  },
+  "zh-cn": {
+    "ext.bpx.name": "BPX 机器人",
+    "bpx.connect": "连接 BPX，机器人 IP [IP]",
+    "bpx.isConnected": "BPX 已连接？",
+    "bpx.disconnect": "断开 BPX 连接",
+    "bpx.standUp": "BPX 站立",
+    "bpx.sitDown": "BPX 坐下",
+    "bpx.damping": "BPX 进入阻尼模式",
+    "bpx.walkGait": "BPX 使用普通行走步态",
+    "bpx.runningGait": "BPX 使用跑步步态",
+    "bpx.paceGait": "BPX 使用 Pace 步态",
+    "bpx.boundGait": "BPX 使用 Bound 步态",
+    "bpx.setVelocity": "BPX 速度 前进 [X] 横移 [Y] 转向 [YAW]",
+    "bpx.stop": "BPX 停止移动",
+    "bpx.batteryLevel": "BPX 电量（%）",
+    "bpx.imuRoll": "BPX IMU 横滚角",
+    "bpx.imuPitch": "BPX IMU 俯仰角",
+    "bpx.imuYaw": "BPX IMU 偏航角",
+    "bpx.motionState": "BPX 当前运动状态",
+    "bpx.currentGait": "BPX 当前步态"
+  }
+};
