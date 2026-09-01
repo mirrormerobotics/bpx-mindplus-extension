@@ -1,0 +1,1 @@
+# Windows AMD64 native packages for CPython 3.8 through 3.14 are bundled in libraries/.
