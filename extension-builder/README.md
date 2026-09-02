@@ -11,6 +11,7 @@
 ```text
 extension-builder/
 ├─ build-extension.ps1       # 一键打包脚本
+├─ official-template/        # Mind+ V2 官方模板的构建文件快照
 ├─ source/extension/         # 完整 BPX 示例（默认构建）
 ├─ templates/blank-extension/# 可复制的最小扩展模板
 ├─ docs/                     # config/index/func 编写教程
@@ -35,7 +36,7 @@ powershell -ExecutionPolicy Bypass -File .\extension-builder\build-extension.ps1
 
 脚本会自动完成：
 
-1. 下载 Mind+ V2 官方模板。
+1. 复制仓库内置的 Mind+ V2 官方模板构建快照（不依赖 Gitee 临时下载）。
 2. 将 `source/extension` 覆盖到模板的 `extension` 目录。
 3. 执行 `npm ci` 安装官方模板依赖。
 4. 执行 `npm run build` 编译积木扩展。
@@ -57,7 +58,7 @@ ext-mirrormerobotics-bpxRobot@0.1.2/config.json
 
 ## 使用已经下载的官方模板
 
-网络不稳定时，可以先手动下载并解压官方模板，然后运行：
+需要换用 Mind+ 官方模板的其他版本时，可以手动下载并解压，然后运行：
 
 ```powershell
 powershell -ExecutionPolicy Bypass -File .\extension-builder\build-extension.ps1 `
