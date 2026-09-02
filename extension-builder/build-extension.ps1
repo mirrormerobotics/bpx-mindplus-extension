@@ -1,13 +1,20 @@
 [CmdletBinding()]
 param(
-    [string]$ExtensionPath = (Join-Path $PSScriptRoot 'source\extension'),
+    [string]$ExtensionPath,
     [string]$TemplatePath,
-    [string]$OutputDirectory = (Join-Path $PSScriptRoot 'dist'),
+    [string]$OutputDirectory,
     [switch]$KeepWork
 )
 
 $ErrorActionPreference = 'Stop'
 Set-StrictMode -Version Latest
+
+if ([string]::IsNullOrWhiteSpace($ExtensionPath)) {
+    $ExtensionPath = Join-Path $PSScriptRoot 'source\extension'
+}
+if ([string]::IsNullOrWhiteSpace($OutputDirectory)) {
+    $OutputDirectory = Join-Path $PSScriptRoot 'dist'
+}
 
 $officialTemplateUrl = 'https://gitee.com/mind-plus/mindplus-ext2-builder/repository/archive/master.zip'
 $sourceExtension = [IO.Path]::GetFullPath($ExtensionPath)
