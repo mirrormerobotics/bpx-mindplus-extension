@@ -1,0 +1,21 @@
+{
+  "id": "helloExample",
+  "version": "1.0.0",
+  "name": {
+    "zh-cn": "我的扩展",
+    "en": "My Extension"
+  },
+  "description": {
+    "zh-cn": "可以复制和修改的 Mind+ Python 积木扩展示例",
+    "en": "A copy-and-edit Mind+ Python block extension example"
+  },
+  "author": "yourname",
+  "cover": "cover.png",
+  "main": "main.js",
+  "isDevice": false,
+  "sku": "",
+  "mode": "python-block",
+  "meta": {
+    "runtimeVersion": "0.0.1"
+  }
+}
