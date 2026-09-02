@@ -17,6 +17,7 @@ if ([string]::IsNullOrWhiteSpace($OutputDirectory)) {
 }
 
 $officialTemplateUrl = 'https://gitee.com/mind-plus/mindplus-ext2-builder/repository/archive/master.zip'
+$bundledTemplate = Join-Path $PSScriptRoot 'official-template'
 $sourceExtension = [IO.Path]::GetFullPath($ExtensionPath)
 $workRoot = Join-Path $PSScriptRoot '.work'
 $templateRoot = Join-Path $workRoot 'mindplus-ext2-builder'
@@ -38,6 +39,25 @@ function Reset-SafeDirectory([string]$Path) {
         Remove-Item -LiteralPath $fullPath -Recurse -Force
     }
     New-Item -ItemType Directory -Path $fullPath | Out-Null
+}
+
+function Copy-Template([string]$Source, [string]$Destination) {
+    New-Item -ItemType Directory -Path $Destination -Force | Out-Null
+    Get-ChildItem -LiteralPath $Source -Force | ForEach-Object {
+        Copy-Item -LiteralPath $_.FullName -Destination $Destination -Recurse -Force
+    }
+}
+
+function Test-ZipFile([string]$Path) {
+    try {
+        Add-Type -AssemblyName System.IO.Compression.FileSystem
+        $archive = [IO.Compression.ZipFile]::OpenRead($Path)
+        $hasEntries = $archive.Entries.Count -gt 0
+        $archive.Dispose()
+        return $hasEntries
+    } catch {
+        return $false
+    }
 }
 
 Assert-Command 'node'
@@ -86,11 +106,24 @@ if ($TemplatePath) {
     if (-not (Test-Path -LiteralPath (Join-Path $resolvedTemplate 'package.json'))) {
         throw "TemplatePath does not contain package.json: $resolvedTemplate"
     }
-    New-Item -ItemType Directory -Path $templateRoot | Out-Null
-    Copy-Item -Path (Join-Path $resolvedTemplate '*') -Destination $templateRoot -Recurse -Force
+    Copy-Template $resolvedTemplate $templateRoot
+} elseif (Test-Path -LiteralPath (Join-Path $bundledTemplate 'package.json')) {
+    Write-Host 'Using the bundled official Mind+ V2 template snapshot...'
+    Copy-Template $bundledTemplate $templateRoot
 } else {
     Write-Host "Downloading the official Mind+ V2 template..."
-    Invoke-WebRequest -Uri $officialTemplateUrl -OutFile $downloadPath
+    $curl = Get-Command 'curl.exe' -ErrorAction SilentlyContinue
+    if ($curl) {
+        & $curl.Source -fL --retry 3 --connect-timeout 20 -A 'Mozilla/5.0' -o $downloadPath $officialTemplateUrl
+        if ($LASTEXITCODE -ne 0) {
+            throw "Unable to download the official Mind+ template (curl exit code $LASTEXITCODE)."
+        }
+    } else {
+        Invoke-WebRequest -UseBasicParsing -Headers @{'User-Agent' = 'Mozilla/5.0'} -Uri $officialTemplateUrl -OutFile $downloadPath
+    }
+    if (-not (Test-ZipFile $downloadPath)) {
+        throw "The official template download is not a valid ZIP. Download it manually from https://gitee.com/mind-plus/mindplus-ext2-builder and pass its directory with -TemplatePath."
+    }
     $extractRoot = Join-Path $workRoot 'downloaded-template'
     Expand-Archive -LiteralPath $downloadPath -DestinationPath $extractRoot
     $packageFile = Get-ChildItem -LiteralPath $extractRoot -Filter package.json -Recurse |
@@ -99,8 +132,7 @@ if ($TemplatePath) {
     if (-not $packageFile) {
         throw 'The downloaded archive is not a recognized Mind+ V2 extension template.'
     }
-    New-Item -ItemType Directory -Path $templateRoot | Out-Null
-    Copy-Item -Path (Join-Path $packageFile.DirectoryName '*') -Destination $templateRoot -Recurse -Force
+    Copy-Template $packageFile.DirectoryName $templateRoot
 }
 
 $templateExtension = Join-Path $templateRoot 'extension'
