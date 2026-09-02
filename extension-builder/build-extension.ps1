@@ -41,7 +41,12 @@ function Reset-SafeDirectory([string]$Path) {
 }
 
 Assert-Command 'node'
-Assert-Command 'npm'
+$npmCommand = if (Get-Command 'npm.cmd' -ErrorAction SilentlyContinue) {
+    'npm.cmd'
+} else {
+    'npm'
+}
+Assert-Command $npmCommand
 if (-not (Test-Path -LiteralPath $sourceExtension -PathType Container)) {
     throw "ExtensionPath does not exist: $sourceExtension"
 }
@@ -54,7 +59,7 @@ foreach ($requiredSourceFile in @('index.js', 'func.js', 'public\config.json', '
 }
 
 try {
-    $config = Get-Content -Raw -LiteralPath $configPath | ConvertFrom-Json
+    $config = Get-Content -Raw -Encoding UTF8 -LiteralPath $configPath | ConvertFrom-Json
 } catch {
     throw "Invalid JSON in $configPath`: $($_.Exception.Message)"
 }
@@ -89,7 +94,7 @@ if ($TemplatePath) {
     $extractRoot = Join-Path $workRoot 'downloaded-template'
     Expand-Archive -LiteralPath $downloadPath -DestinationPath $extractRoot
     $packageFile = Get-ChildItem -LiteralPath $extractRoot -Filter package.json -Recurse |
-        Where-Object { (Get-Content -Raw -LiteralPath $_.FullName) -match 'mindplus-extension-builder' } |
+        Where-Object { (Get-Content -Raw -Encoding UTF8 -LiteralPath $_.FullName) -match 'mindplus-extension-builder' } |
         Select-Object -First 1
     if (-not $packageFile) {
         throw 'The downloaded archive is not a recognized Mind+ V2 extension template.'
@@ -107,11 +112,11 @@ Copy-Item -LiteralPath $sourceExtension -Destination $templateExtension -Recurse
 Push-Location $templateRoot
 try {
     Write-Host 'Installing template dependencies...'
-    npm ci
+    & $npmCommand ci
     if ($LASTEXITCODE -ne 0) { throw "npm ci failed with exit code $LASTEXITCODE" }
 
     Write-Host 'Compiling the BPX Mind+ extension...'
-    npm run build
+    & $npmCommand run build
     if ($LASTEXITCODE -ne 0) { throw "npm run build failed with exit code $LASTEXITCODE" }
 } finally {
     Pop-Location
