@@ -96,6 +96,15 @@ Python主程序开始
 
 这里的 `34` 表示电量约为 34%。需要停止时，点击右上角的停止按钮。
 
+## 扩展开发与打包
+本仓库的 extension-builder 目录提供了通用的 Mind+ V2 扩展打包工具，并保留了 BPX 扩展作为完整示例。​
+它可以用于：​
+• 重新打包 BPX 扩展。​
+• 修改或增加 BPX 积木。​
+• 复制空白模板，开发其他 Mind+ 扩展。​
+• 将扩展源码打包成 Mind+ 可以加载的 ZIP 文件。​
+完整的环境安装、扩展开发和打包步骤请阅读：​extension-builder 使用说明
+
 ## SDK 子模块
 
 本仓库通过 Git 子模块引用官方 SDK：[mirrormerobotics/bpx_sdk_open](https://github.com/mirrormerobotics/bpx_sdk_open)，路径为 `libraries/bpx_sdk_open`。
