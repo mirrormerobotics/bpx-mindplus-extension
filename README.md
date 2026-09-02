@@ -34,7 +34,7 @@
 
 ## 四、加载 BPX Python 积木扩展
 
-1. 从 [v0.1.2 Release](https://github.com/mirrormerobotics/bpx-mindplus-extension/releases/tag/v0.1.2) 下载并解压 `BPX-MindPlus-extension-v0.1.2-mirrormerobotics-win-cp38-cp314.zip`。
+1. 从 [v0.1.2 Release](https://github.com/mirrormerobotics/bpx-mindplus-extension/releases/tag/v0.1.2) 下载并解压 `MindPlus-extension-mirrormerobotics-bpxRobot-v0.1.2.zip`。
 2. 在扩展页面左下角点击“加载测试扩展”。
 3. 选择解压目录中的 `config.json`。
 4. 加载成功后，扩展页面会出现带“测试”标志的“BPX机器人”卡片。
