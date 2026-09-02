@@ -30,7 +30,6 @@
 4. 点击左下角橙色的“扩展”。
 5. 如果扩展页面左下角已经显示“加载测试扩展”，说明开发者模式已经打开，可以直接进行下一步。
 
-开发者模式下可以选择编译目录中的 `config.json` 加载测试扩展。详见 [Mind+ 官方扩展开发说明](https://mindplus.dfrobot.com.cn/mp2/Extensions/ExtDevelopmentDocs/extension-development-overview/)。
 
 ## 四、加载 BPX Python 积木扩展
 
