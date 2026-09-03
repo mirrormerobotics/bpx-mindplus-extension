@@ -45,14 +45,17 @@ ping 192.168.1.137
 
 1. 打开 Mind+。
 2. 进入“程序设计”。
-3. 选择“Python 积木模式”新建一个项目。
-4. 开始时左上角会显示 Python 未连接。点击后下载内置 Python，下载完成后点击连接。
+3. 选择“Python 积木模式”，新建一个项目。
 
-![Mind+ 下载内置 Python](assets/mindplus-step-1.png)
+   ![选择 Python 积木模式](assets/mindplus-python-mode.jpg)
 
-![Mind+ 连接内置 Python](assets/mindplus-step-2.png)
+4. 点击顶部的“Python 未连接”，选择“Mind+ 内置 Python”。如果尚未安装，请先下载；显示“可用”后，点击右下角“连接”。
 
-![Mind+ Python 连接成功](assets/mindplus-step-3.png)
+   ![点击顶部的 Python 未连接](assets/mindplus-python-disconnected.jpg)
+
+   ![选择 Mind+ 内置 Python 并点击连接](assets/mindplus-python-environment.jpg)
+
+   注：上图中的内置 Python 已显示“可用”，此时无需重复下载，选择该项后点击“连接”即可。
 
 最终顶部应显示：`Mind+ 内置 Python 3.11.9 - 连接成功`。
 
