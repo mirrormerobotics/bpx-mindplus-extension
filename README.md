@@ -95,7 +95,6 @@ ping 192.168.1.52
 
 ![BPX 机器人积木](assets/mindplus-step-5.png)
 
-图中的“BPX 卧下”对应“BPX 趴下”积木。
 
 ## 六、确认 BPX 是否可以连接
 
