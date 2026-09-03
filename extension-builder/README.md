@@ -93,6 +93,4 @@ powershell -ExecutionPolicy Bypass -File .\extension-builder\build-extension.ps1
 
 修改后重新运行打包脚本。不要手工修改 `.work/` 或 `dist/` 中的文件，因为它们会在下次构建时重新生成。
 
-## 发布
 
-`dist/` 不提交到 Git 仓库。测试通过后，在 GitHub Releases 中创建对应版本，并把生成的 ZIP 作为 Release Asset 上传。
