@@ -93,7 +93,7 @@ ping 192.168.1.52
 - BPX 趴下
 - 其他运动和状态积木
 
-![BPX 机器人积木](assets/mindplus-step-5.png)
+![BPX 机器人积木](assets/bpx-blocks-v0.1.3.png)
 
 
 ## 六、确认 BPX 是否可以连接
