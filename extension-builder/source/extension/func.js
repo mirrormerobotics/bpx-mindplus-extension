@@ -7,6 +7,7 @@ class Func {
     _addCore(generator) {
         generator.addImport('import time');
         generator.addImport('import bpx_sdk');
+        generator.addImport('from bpx_sdk.mindplus_control import MindPlusControl');
         generator.addVariable('bpx_motion', 'bpx_motion = None');
         generator.addFunction([
             'def _bpx_require():',
@@ -57,47 +58,87 @@ class Func {
 
     standUp(generator) {
         this._addCore(generator);
-        return '_bpx_require().setStandUp()';
+        return 'MindPlusControl(_bpx_require()).stand()';
     }
 
     sitDown(generator) {
         this._addCore(generator);
-        return '_bpx_require().setSitDown()';
+        return 'MindPlusControl(_bpx_require()).lie_down()';
     }
 
     damping(generator) {
         this._addCore(generator);
-        return '_bpx_require().setDamping()';
+        return 'MindPlusControl(_bpx_require()).emergency_stop()';
     }
 
     walkGait(generator) {
         this._addCore(generator);
-        return '_bpx_require().setWalk()';
+        return 'MindPlusControl(_bpx_require()).gait("setWalk", 0)';
     }
 
     runningGait(generator) {
         this._addCore(generator);
-        return '_bpx_require().setRunning()';
+        return 'MindPlusControl(_bpx_require()).gait("setRunning", 8, 0)';
     }
 
     paceGait(generator) {
         this._addCore(generator);
-        return '_bpx_require().setPace()';
+        return 'MindPlusControl(_bpx_require()).gait("setPace", 6, 2)';
     }
 
     boundGait(generator) {
         this._addCore(generator);
-        return '_bpx_require().setBound()';
+        return 'MindPlusControl(_bpx_require()).gait("setBound", 6, 1)';
     }
 
     setVelocity(generator, block, parameter) {
         this._addCore(generator);
-        return `_bpx_require().setVelocity(float(${parameter.X.code}), float(${parameter.Y.code}), float(${parameter.YAW.code}))`;
+        return `MindPlusControl(_bpx_require()).velocity(float(${parameter.X.code}), float(${parameter.Y.code}), float(${parameter.YAW.code}))`;
     }
 
     stop(generator) {
         this._addCore(generator);
-        return '_bpx_require().setVelocity(0.0, 0.0, 0.0)';
+        return 'MindPlusControl(_bpx_require()).stop()';
+    }
+
+    resetJoints(generator) {
+        this._addCore(generator);
+        return 'MindPlusControl(_bpx_require()).reset_joints()';
+    }
+
+    velocityFor(generator, block, parameter) {
+        this._addCore(generator);
+        return `MindPlusControl(_bpx_require()).velocity_for(float(${parameter.X.code}), float(${parameter.Y.code}), float(${parameter.YAW.code}), float(${parameter.SECONDS.code}))`;
+    }
+
+    bipedalGait(generator) {
+        this._addCore(generator);
+        return 'MindPlusControl(_bpx_require()).gait("setBipedal", 3, 1)';
+    }
+
+    invBipedalGait(generator) {
+        this._addCore(generator);
+        return 'MindPlusControl(_bpx_require()).gait("setInvBipedal", 3, -1)';
+    }
+
+    pronkGait(generator) {
+        this._addCore(generator);
+        return 'MindPlusControl(_bpx_require()).gait("setPronk", 6, -1)';
+    }
+
+    leftFlip(generator) {
+        this._addCore(generator);
+        return 'MindPlusControl(_bpx_require()).flip("setLeftFlip", -1)';
+    }
+
+    rightFlip(generator) {
+        this._addCore(generator);
+        return 'MindPlusControl(_bpx_require()).flip("setRightFlip", -2)';
+    }
+
+    subGait(generator) {
+        this._addCore(generator);
+        return ['MindPlusControl(_bpx_require()).sub_gait()', generator.ORDER_ATOMIC];
     }
 
     batteryLevel(generator) {

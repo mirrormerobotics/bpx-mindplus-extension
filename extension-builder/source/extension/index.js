@@ -31,6 +31,34 @@ class ExtensionBPX {
             color2: '#2446B7',
             color3: '#193692',
             blocks: [
+                ...[
+                    ['resetJoints', 'BPX reset joints (ground-contact pose required)'],
+                    ['invBipedalGait', 'BPX use inverted bipedal gait'],
+                    ['bipedalGait', 'BPX use bipedal gait'],
+                    ['pronkGait', 'BPX use pronk gait'],
+                    ['leftFlip', 'BPX left flip (trigger once)'],
+                    ['rightFlip', 'BPX right flip (trigger once)'],
+                ].map(([opcode, label]) => ({
+                    opcode,
+                    blockType: BlockType.COMMAND,
+                    text: formatMessage({id: `bpx.${opcode}`, default: label}),
+                })),
+                {
+                    opcode: 'subGait',
+                    blockType: BlockType.REPORTER,
+                    text: formatMessage({id: 'bpx.subGait', default: 'BPX current sub-gait'}),
+                },
+                {
+                    opcode: 'velocityFor',
+                    blockType: BlockType.COMMAND,
+                    text: formatMessage({id: 'bpx.velocityFor', default: 'BPX velocity forward [X] lateral [Y] yaw [YAW] for [SECONDS] seconds then stop'}),
+                    arguments: {
+                        X: {type: ArgumentType.NUMBER, defaultValue: 0},
+                        Y: {type: ArgumentType.NUMBER, defaultValue: 0},
+                        YAW: {type: ArgumentType.NUMBER, defaultValue: 0.2},
+                        SECONDS: {type: ArgumentType.NUMBER, defaultValue: 30},
+                    },
+                },
                 {
                     opcode: 'connect',
                     blockType: BlockType.COMMAND,
@@ -133,7 +161,15 @@ class ExtensionBPX {
                     blockType: BlockType.REPORTER,
                     text: formatMessage({id: 'bpx.currentGait', default: 'BPX current gait'}),
                 }
-            ],
+            ].sort((a, b) => {
+                const order = ['connect', 'isConnected', 'disconnect', 'resetJoints',
+                    'standUp', 'sitDown', 'damping', 'walkGait', 'runningGait',
+                    'paceGait', 'boundGait', 'pronkGait', 'invBipedalGait', 'bipedalGait',
+                    'leftFlip', 'rightFlip', 'setVelocity', 'velocityFor', 'stop',
+                    'batteryLevel', 'imuRoll', 'imuPitch', 'imuYaw', 'motionState',
+                    'currentGait', 'subGait'];
+                return order.indexOf(a.opcode) - order.indexOf(b.opcode);
+            }),
             menus: {}
         };
     }
