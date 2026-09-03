@@ -142,15 +142,21 @@ if (Test-Path -LiteralPath $templateExtension) {
 Copy-Item -LiteralPath $sourceExtension -Destination $templateExtension -Recurse
 
 Push-Location $templateRoot
+$previousNodeOptions = $env:NODE_OPTIONS
 try {
     Write-Host 'Installing template dependencies...'
     & $npmCommand ci
     if ($LASTEXITCODE -ne 0) { throw "npm ci failed with exit code $LASTEXITCODE" }
 
-    Write-Host 'Compiling the BPX Mind+ extension...'
+    # The official template uses webpack 4, which requires this with Node.js 18+.
+    if ($env:NODE_OPTIONS -notmatch '--openssl-legacy-provider') {
+        $env:NODE_OPTIONS = "$previousNodeOptions --openssl-legacy-provider".Trim()
+    }
+    Write-Host 'Compiling the Mind+ extension...'
     & $npmCommand run build
     if ($LASTEXITCODE -ne 0) { throw "npm run build failed with exit code $LASTEXITCODE" }
 } finally {
+    $env:NODE_OPTIONS = $previousNodeOptions
     Pop-Location
 }
 
