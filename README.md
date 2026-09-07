@@ -95,7 +95,6 @@ Return to the programming page and check the category list on the left. Open **B
 
 ![BPX Robot blocks](assets/bpx-blocks-v0.1.3.png)
 
-The block labeled “BPX 卧下” in the screenshot corresponds to the current **BPX lie down** block.
 
 ## 6. Confirm That BPX Can Connect
 
