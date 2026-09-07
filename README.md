@@ -1,207 +1,201 @@
-# BPX 接入 Mind+ 指导说明书
+# Using BPX with Mind+
 
-## 适用环境
+English | [中文](README.zh-CN.md)
 
-本仓库当前发布的 BPX Mind+ Python 积木扩展包仅支持：
+## Supported Environment
 
-- Windows 10/11 64 位
-- Mind+ V2.0.7 或更高版本
-- Mind+ Python 积木模式
+The current BPX Mind+ Python block extension supports:
 
-暂不支持 Linux 和 macOS。
+- 64-bit Windows 10/11
+- Mind+ V2.0.7 or later
+- Mind+ Python Block Mode
 
-## 一、准备机器人和网络
+Linux and macOS are not currently supported.
 
-1. 打开 BPX 机器人电源。
-2. 根据连接方式确定机器人 IP：
+## 1. Prepare the Robot and Network
 
-| 连接方式 | 操作方法 | 机器人 IP |
+1. Turn on the BPX robot.
+2. Determine the robot IP address according to the connection method:
+
+| Connection | How to connect | Robot IP |
 | --- | --- | --- |
-| RJ45 网线直连 | 使用网线直接连接电脑和机器人 | `10.21.20.1` |
-| 机器人 AP 热点 | 在电脑的 WiFi 列表中连接机器人开启的热点 | `10.21.40.1` |
-| Station WiFi | 让机器人和电脑连接到同一个 WiFi | 使用机器人接入 WiFi 后获得的 IP |
+| Direct RJ45 connection | Connect the computer directly to the robot with an Ethernet cable | `10.21.20.1` |
+| Robot AP hotspot | Connect the computer to the Wi-Fi hotspot created by the robot | `10.21.40.1` |
+| Station Wi-Fi | Connect the robot and computer to the same Wi-Fi network | Use the IP assigned to the robot on that Wi-Fi network |
 
-使用 Station WiFi 时，可以在机器人状态或管理页面中查看 IP，也可以在路由器的已连接设备列表中查找机器人。本文中的示例 IP 为：
+When using Station Wi-Fi, check the IP on the robot status or management page, or find the robot in the router's connected-device list. The example IP used in this guide is:
 
 ```text
 192.168.1.52
 ```
 
-该地址只是示例。不同机器人、路由器或网络环境分配的 IP 可能不同，请以实际显示的 IP 为准。
+This is only an example. The address assigned to your robot may be different; always use the IP shown in your own network environment.
 
-运行 Mind+ 程序前，可以在 Windows PowerShell 中测试网络：
+Before running the Mind+ program, you can test network connectivity in Windows PowerShell:
 
 ```powershell
 ping 192.168.1.52
 ```
 
-请把命令中的 IP 替换成机器人的实际 IP。如果能够收到回复，说明电脑通常可以访问机器人；如果一直显示请求超时，请重新检查网络连接和 IP。
+Replace the example address with the actual robot IP. Replies generally indicate that the computer can reach the robot. If every request times out, check the network connection and IP again.
 
-更多说明请参考：
+For more information, see [BPX SDK: Network Connection and IP](https://github.com/mirrormerobotics/bpx_sdk_open#network-connection-and-ip).
 
-[BPX SDK：网络连接与 IP](https://github.com/mirrormerobotics/bpx_sdk_open/blob/master/README.zh-CN.md#网络连接与-ip)
+## 2. Enter Python Block Mode
 
-## 二、进入 Python 积木模式
+1. Open Mind+.
+2. Enter **Program Design**.
+3. Select **Python Block Mode** and create a project.
 
-1. 打开 Mind+。
-2. 进入“程序设计”。
-3. 选择“Python 积木模式”，新建一个项目。
+   ![Select Python Block Mode](assets/mindplus-python-mode.jpg)
 
-   ![选择 Python 积木模式](assets/mindplus-python-mode.jpg)
+4. Click **Python not connected** at the top and select **Mind+ built-in Python**. Download it first if it is not installed. When its status becomes available, click **Connect** in the lower-right corner.
 
-4. 点击顶部的“Python 未连接”，选择“Mind+ 内置 Python”。如果尚未安装，请先下载；显示“可用”后，点击右下角“连接”。
+   ![Click Python not connected](assets/mindplus-python-disconnected.jpg)
 
-   ![点击顶部的 Python 未连接](assets/mindplus-python-disconnected.jpg)
+   ![Select Mind+ built-in Python and connect](assets/mindplus-python-environment.jpg)
 
-   ![选择 Mind+ 内置 Python 并点击连接](assets/mindplus-python-environment.jpg)
+   In the image, built-in Python is already marked as available, so it does not need to be downloaded again. Select it and click **Connect**.
 
-   注：上图中的内置 Python 已显示“可用”，此时无需重复下载，选择该项后点击“连接”即可。
+The top bar should finally show `Mind+ built-in Python 3.11.9 - connected successfully` or an equivalent connected status.
 
-最终顶部应显示：`Mind+ 内置 Python 3.11.9 - 连接成功`。
+## 3. Enable Extension Developer Mode
 
-## 三、打开扩展库开发者模式
+Loading a test extension requires Extension Developer Mode in Mind+ V2. Use Mind+ V2.0.7 or later.
 
-“加载测试扩展”需要使用 Mind+ V2 的扩展库开发者模式。请使用 Mind+ V2.0.7 或更高版本。
+1. Click the gear icon in the upper-right corner of Mind+.
+2. Find and enable **Extension Developer Mode**.
+3. Return to the programming page.
+4. Click the orange **Extensions** button in the lower-left corner.
+5. If **Load Test Extension** appears in the lower-left corner of the extension page, Developer Mode is enabled.
 
-1. 点击 Mind+ 右上角的齿轮。
-2. 找到“扩展库开发者模式”并打开。
-3. 返回编程页面。
-4. 点击左下角橙色的“扩展”。
-5. 如果扩展页面左下角已经显示“加载测试扩展”，说明开发者模式已经打开，可以进行下一步。
+If this setting is unavailable, update Mind+ and reopen the application.
 
-如果设置中没有“扩展库开发者模式”，请先升级 Mind+，然后重新打开软件。
+## 4. Load the BPX Python Block Extension
 
-## 四、加载 BPX Python 积木扩展
+1. Download `MindPlus-extension-mirrormerobotics-bpxRobot-v0.1.3.zip` from the [v0.1.3 release](https://github.com/mirrormerobotics/bpx-mindplus-extension/releases/tag/v0.1.3), then extract the complete ZIP.
+2. Click **Load Test Extension** in the lower-left corner of the extension page.
+3. Select `config.json` from the extracted directory.
+4. After loading, a **BPX Robot** card marked **Test** appears on the extension page.
+5. Click the card to add it to the project, then click **Back** in the upper-left corner.
 
-1. 从 [v0.1.3 Release](https://github.com/mirrormerobotics/bpx-mindplus-extension/releases/tag/v0.1.3) 下载并解压 `MindPlus-extension-mirrormerobotics-bpxRobot-v0.1.3.zip`。
-2. 在扩展页面左下角点击“加载测试扩展”。
-3. 选择解压目录中的 `config.json`。
-4. 加载成功后，扩展页面会出现带“测试”标志的“BPX机器人”卡片。
-5. 点击卡片将它加载到项目中，然后点击左上角“返回”。
+The extension page should look similar to this:
 
-扩展页面大致如下：
+![BPX Robot test extension](assets/mindplus-step-4.png)
 
-![BPX 机器人测试扩展](assets/mindplus-step-4.png)
+## 5. Confirm That the BPX Blocks Are Available
 
-## 五、确认 BPX 积木已经出现
+Return to the programming page and check the category list on the left. Open **BPX Robot** to find blocks such as:
 
-回到编程页面后，检查左侧分类栏。应该能看到“BPX机器人”分类，点击后会出现：
+- Connect BPX
+- BPX connected?
+- BPX stand
+- BPX lie down
+- Other motion and state blocks
 
-- 连接 BPX
-- BPX 已连接？
-- BPX 站立
-- BPX 趴下
-- 其他运动和状态积木
+![BPX Robot blocks](assets/bpx-blocks-v0.1.3.png)
 
-![BPX 机器人积木](assets/bpx-blocks-v0.1.3.png)
+The block labeled “BPX 卧下” in the screenshot corresponds to the current **BPX lie down** block.
 
+## 6. Confirm That BPX Can Connect
 
-## 六、确认 BPX 是否可以连接
+First build a program that reads the battery level without commanding robot motion.
 
-先搭建一个只读取电量、不控制机器人运动的程序，确认电脑能够与 BPX 通信。
+1. Keep the **Python program starts** block on the canvas.
+2. Open **BPX Robot**, then place **Connect BPX, robot IP** below the start block.
+3. Replace the IP with the actual robot IP. `192.168.1.52` in the image is only an example.
+4. Place a **print** block below **Connect BPX**.
+5. Put the oval **BPX battery level (%)** reporter into the input of the print block.
 
-具体操作：
+![Connect to BPX and print the battery once](assets/bpx-battery-once.png)
 
-1. 保留画布上的“Python主程序开始”。
-2. 打开左侧“BPX机器人”分类，将“连接 BPX，机器人 IP”拖到“Python主程序开始”下面。
-3. 把 IP 改成自己机器人的实际 IP。图中 `192.168.1.52` 仅为示例。
-4. 找到“打印”积木，将它连接在“连接 BPX”下面。
-5. 从“BPX机器人”分类拖出椭圆形的“BPX 电量（%）”，放进“打印”积木的输入框。
+## 7. Run the Program and View the Result
 
-
-![连接 BPX 并打印一次电量](assets/bpx-battery-once.png)
-
-## 七、运行并查看结果
-
-1. 点击右上角橙色的“运行”。
-2. 程序先连接机器人，可能需要等待几秒。
-3. 连接成功并取得电量数据后，右下角终端会输出一次电量，例如：
+1. Click the orange **Run** button in the upper-right corner.
+2. The program connects to the robot first, which may take a few seconds.
+3. After a successful connection and battery reading, the terminal in the lower-right corner prints one value, for example:
 
 ```text
 34
 ```
 
-这里的 `34` 表示电量约为 34%。程序中途需要停止时，点击右上角的停止按钮。
+`34` means the battery level is approximately 34%. To stop the program while it is running, click the stop button in the upper-right corner.
 
-## 八、常用积木及用法
+## 8. Common Blocks and Usage
 
-下面的示例均使用 0.1.3 扩展。每张图是一个独立程序。图中的 IP 请替换成实际地址。
+The following examples use extension version 0.1.3. Each image shows a separate program. Replace the example IP with the actual robot IP.
 
-示例截图中的“BPX 卧下”对应本版本的“BPX 趴下”积木。
 
-### 1. 关节重置
 
-“BPX 关节重置（需贴地姿态）”用于向机器人发送一次位置标零请求，随后等待 1 秒。它不是让机器人站立，也不是普通的停止指令。
+### 1. Joint Reset
 
-- 正常使用时，如果机器人已经完成正确初始化，不必重置。
-- 仅在机器人使用说明或技术支持明确要求重新标零时使用。
-- **执行前必须确认机器人足底、小腿以及小腿和大腿连接处均接触地面。**
+**BPX joint reset (ground-contact pose required)** sends one zero-position request and then waits for one second. It does not make the robot stand and is not a normal stop command.
 
-标零姿态要求见 [官方 SDK 运控调用层说明](https://github.com/mirrormerobotics/bpx_sdk_open/blob/master/README.zh-CN.md#运控调用层)。
+- If the robot has already been initialized correctly, a reset is not normally required.
+- Use it only when the robot instructions or technical support explicitly require zeroing.
+- **Before running it, make sure the feet, shanks, and the joints between the shanks and thighs are all in contact with the ground.**
 
-### 2. 按指定速度运动一段时间，然后停止
+See the zeroing-pose requirement in the [official SDK Motion Control Layer documentation](https://github.com/mirrormerobotics/bpx_sdk_open#motion-control-layer).
 
-以图中的积木为例：
+### 2. Move at a Specified Velocity and Then Stop
 
-```text
-BPX 按速度 前进［0］横移［0］转向［0.2］持续［4］秒后停止
-```
-
-含义是：按转向参数 `0.2` 运动约 4 秒，然后自动执行停止流程。
-
-![按指定速度转向 4 秒后停止](assets/bpx-timed-velocity.png)
-
-这个积木可以近似等效为以下结构（循环调用会产生少量额外耗时）：
+For example, this block:
 
 ```text
-重复执行［20］次
-    BPX 速度 前进［0］横移［0］转向［0.2］
-    等待［0.2］秒
-BPX 停止移动
+BPX move at velocity: forward [0], lateral [0], yaw [0.2], for [4] seconds, then stop
 ```
 
+uses a yaw value of `0.2` for approximately four seconds and then automatically runs the stop sequence.
 
-### 3. 切换步态
+![Turn at the specified velocity for 4 seconds and stop](assets/bpx-timed-velocity.png)
 
-“BPX 使用……步态”用于选择步态；
-下面以遛步、奔跑为例。
+It is approximately equivalent to the following structure. Repeated calls introduce a small amount of additional execution time:
 
-**遛步：**
+```text
+repeat [20] times
+    BPX velocity: forward [0], lateral [0], yaw [0.2]
+    wait [0.2] seconds
+BPX stop moving
+```
 
-![切换到遛步并前进](assets/bpx-pace-example.png)
+### 3. Switch Gaits
 
+Use a **BPX use ... gait** block to select a gait. The following examples show Pace and Running.
 
-**奔跑：**
+**Pace:**
 
-![切换到奔跑并前进](assets/bpx-running-example.png)
+![Switch to Pace and move forward](assets/bpx-pace-example.png)
 
-示例参数不代表适用于所有场地和机器人状态，应先在安全条件下低速测试。
+**Running:**
 
-### 4. 侧翻
+![Switch to Running and move forward](assets/bpx-running-example.png)
 
-右侧翻可以按下图搭建：
+The example values are not guaranteed to suit every surface or robot state. Begin with a low speed under safe conditions.
 
-![右侧翻示例](assets/bpx-right-flip-example.png)
+### 4. Side Flip
 
-仅在有足够空间和安全保障的条件下操作。
+A right-side flip can be arranged as follows:
 
+![Right-side flip example](assets/bpx-right-flip-example.png)
 
-## 扩展开发与打包
+Run this action only with sufficient clear space and appropriate safety precautions.
 
-如果想开发自己的 Mind+ 扩展，本仓库的 `extension-builder` 目录提供了通用的 Mind+ V2 扩展打包工具，并保留 BPX 扩展作为完整示例。
+## Extension Development and Packaging
 
-它可以用于：
+The `extension-builder` directory provides a general-purpose Mind+ V2 extension packaging tool and retains the BPX extension as a complete example.
 
-- 重新打包 BPX 扩展
-- 修改或增加 BPX 积木
-- 复制空白模板，开发其他 Mind+ 扩展
-- 将扩展源码打包成 Mind+ 可以加载的 ZIP 文件
+It can be used to:
 
-## SDK 子模块
+- Rebuild the BPX extension
+- Modify or add BPX blocks
+- Copy the blank template to develop another Mind+ extension
+- Package extension source into a ZIP that Mind+ can load
 
-本仓库通过 Git 子模块引用官方 SDK：[mirrormerobotics/bpx_sdk_open](https://github.com/mirrormerobotics/bpx_sdk_open)，路径为 `libraries/bpx_sdk_open`。
+## SDK Submodule
 
-克隆仓库时请使用：
+This repository includes the official [mirrormerobotics/bpx_sdk_open](https://github.com/mirrormerobotics/bpx_sdk_open) SDK as a Git submodule at `libraries/bpx_sdk_open`.
+
+Clone the repository with:
 
 ```bash
 git clone --recurse-submodules https://github.com/mirrormerobotics/bpx-mindplus-extension.git
