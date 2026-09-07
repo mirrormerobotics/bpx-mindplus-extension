@@ -47,13 +47,13 @@ For more information, see [BPX SDK: Network Connection and IP](https://github.co
 2. Enter **Program Design**.
 3. Select **Python Block Mode** and create a project.
 
-   ![Select Python Block Mode](assets/mindplus-python-mode.jpg)
+   ![Select Python Block Mode](assets/en-mindplus-python-mode.jpg)
 
 4. Click **Python not connected** at the top and select **Mind+ built-in Python**. Download it first if it is not installed. When its status becomes available, click **Connect** in the lower-right corner.
 
-   ![Click Python not connected](assets/mindplus-python-disconnected.jpg)
+   ![Click Python not connected](assets/en-mindplus-python-disconnected.jpg)
 
-   ![Select Mind+ built-in Python and connect](assets/mindplus-python-environment.jpg)
+   ![Select Mind+ built-in Python and connect](assets/en-mindplus-python-environment.jpg)
 
    In the image, built-in Python is already marked as available, so it does not need to be downloaded again. Select it and click **Connect**.
 
@@ -81,7 +81,7 @@ If this setting is unavailable, update Mind+ and reopen the application.
 
 The extension page should look similar to this:
 
-![BPX Robot test extension](assets/mindplus-step-4.png)
+![BPX Robot test extension](assets/en-mindplus-step-4.png)
 
 ## 5. Confirm That the BPX Blocks Are Available
 
@@ -93,7 +93,7 @@ Return to the programming page and check the category list on the left. Open **B
 - BPX lie down
 - Other motion and state blocks
 
-![BPX Robot blocks](assets/bpx-blocks-v0.1.3.png)
+![BPX Robot blocks](assets/en-bpx-blocks-v0.1.3.png)
 
 
 ## 6. Confirm That BPX Can Connect
@@ -106,7 +106,7 @@ First build a program that reads the battery level without commanding robot moti
 4. Place a **print** block below **Connect BPX**.
 5. Put the oval **BPX battery level (%)** reporter into the input of the print block.
 
-![Connect to BPX and print the battery once](assets/bpx-battery-once.png)
+![Connect to BPX and print the battery once](assets/en-bpx-battery-once.png)
 
 ## 7. Run the Program and View the Result
 
@@ -146,7 +146,7 @@ BPX move at velocity: forward [0], lateral [0], yaw [0.2], for [4] seconds, then
 
 uses a yaw value of `0.2` for approximately four seconds and then automatically runs the stop sequence.
 
-![Turn at the specified velocity for 4 seconds and stop](assets/bpx-timed-velocity.png)
+![Turn at the specified velocity for 4 seconds and stop](assets/en-bpx-timed-velocity.png)
 
 It is approximately equivalent to the following structure. Repeated calls introduce a small amount of additional execution time:
 
@@ -163,11 +163,11 @@ Use a **BPX use ... gait** block to select a gait. The following examples show P
 
 **Pace:**
 
-![Switch to Pace and move forward](assets/bpx-pace-example.png)
+![Switch to Pace and move forward](assets/en-bpx-pace-example.png)
 
 **Running:**
 
-![Switch to Running and move forward](assets/bpx-running-example.png)
+![Switch to Running and move forward](assets/en-bpx-running-example.png)
 
 The example values are not guaranteed to suit every surface or robot state. Begin with a low speed under safe conditions.
 
@@ -175,7 +175,7 @@ The example values are not guaranteed to suit every surface or robot state. Begi
 
 A right-side flip can be arranged as follows:
 
-![Right-side flip example](assets/bpx-right-flip-example.png)
+![Right-side flip example](assets/en-bpx-right-flip-example.png)
 
 Run this action only with sufficient clear space and appropriate safety precautions.
 
