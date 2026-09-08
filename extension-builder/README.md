@@ -1,96 +1,100 @@
-# BPX Mind+ 扩展打包工具
+# BPX Mind+ Extension Builder
 
-这是一个通用的 Mind+ V2 扩展构建器，同时保留 BPX Python 积木扩展作为完整示例。脚本默认使用仓库内置的 **Mind+ V2 官方 `mindplus-ext2-builder` 模板构建快照**，放入用户指定的扩展源码，执行官方的 `npm run build`，最后生成 Mind+ 可加载的 ZIP。
+English | [中文](README.zh-CN.md)
 
-官方开发文档：<https://mindplus.dfrobot.com.cn/mp2/Extensions/ExtDevelopmentDocs/extension-development-overview/>
+This directory contains a general-purpose Mind+ V2 extension builder and keeps the BPX Python block extension as a complete example. The script uses the bundled snapshot of the official Mind+ V2 `mindplus-ext2-builder` template, inserts the selected extension source, runs the official `npm run build` process, and creates a ZIP that Mind+ can load.
 
-官方模板：<https://gitee.com/mind-plus/mindplus-ext2-builder>
+Official development documentation: <https://mindplus.dfrobot.com.cn/mp2/Extensions/ExtDevelopmentDocs/extension-development-overview/>
 
-## 目录
+Official template: <https://gitee.com/mind-plus/mindplus-ext2-builder>
+
+## Directory Layout
 
 ```text
 extension-builder/
-├─ build-extension.ps1       # 一键打包脚本
-├─ official-template/        # Mind+ V2 官方模板的构建文件快照
-├─ source/extension/         # 完整 BPX 示例（默认构建）
-├─ templates/blank-extension/# 可复制的最小扩展模板
-├─ docs/                     # config/index/func 编写教程
-├─ dist/                     # 最终 ZIP（自动生成，不提交）
-└─ .work/                    # 临时官方模板（自动生成，不提交）
+├─ build-extension.ps1       # One-command packaging script
+├─ official-template/        # Snapshot of the official Mind+ V2 template
+├─ source/extension/         # Complete BPX example (default build target)
+├─ templates/blank-extension/# Minimal template for a new extension
+├─ docs/                     # Guides for config, blocks, and code generation
+├─ dist/                     # Generated ZIP output (not committed)
+└─ .work/                    # Temporary build directory (not committed)
 ```
 
-## 环境要求
+## Requirements
 
-- Windows 10/11 64 位
-- PowerShell 5.1 或 PowerShell 7
-- Node.js 18 或更高版本（包含 npm）
-- 能访问 npm 依赖下载源（默认使用内置模板，无需从 Gitee 下载）
+- 64-bit Windows 10 or Windows 11
+- PowerShell 5.1 or PowerShell 7
+- Node.js 18 or later, including npm
+- Access to the npm package registry; the bundled template does not need to be downloaded from Gitee
 
-## 一键打包
+## Build the BPX Example
 
-在仓库根目录打开 PowerShell：
+Open PowerShell in the repository root and run:
 
 ```powershell
 powershell -ExecutionPolicy Bypass -File .\extension-builder\build-extension.ps1
 ```
 
-脚本会自动完成：
+The script will:
 
-1. 复制仓库内置的 Mind+ V2 官方模板构建快照（不依赖 Gitee 临时下载）。
-2. 将 `source/extension` 覆盖到模板的 `extension` 目录。
-3. 执行 `npm ci` 安装官方模板依赖。
-4. 执行 `npm run build` 编译积木扩展。
-5. 检查 `config.json`、`main.js` 和 `cover.png`。
-6. 将完整扩展目录压缩到 `extension-builder/dist/`。
-7. 输出 ZIP 的 SHA-256 校验值。
+1. Copy the bundled snapshot of the official Mind+ V2 template.
+2. Overlay `source/extension` onto the template's `extension` directory.
+3. Run `npm ci` to install the template dependencies.
+4. Run `npm run build` to compile the extension.
+5. Check `config.json`, `main.js`, and `cover.png`.
+6. Package the complete extension in `extension-builder/dist/`.
+7. Print the ZIP file's SHA-256 checksum.
 
-不传参数时构建保留的 BPX 示例。默认成果物：
+With no arguments, the bundled BPX example is built. The default output is:
 
 ```text
 extension-builder/dist/MindPlus-extension-mirrormerobotics-bpxRobot-v0.1.3.zip
 ```
 
-解压后选择下面的文件，即可在 Mind+ 的“加载测试扩展”中导入：
+Extract the ZIP and select this file in Mind+ **Load Test Extension**:
 
 ```text
 ext-mirrormerobotics-bpxRobot@0.1.3/config.json
 ```
 
-## 使用已经下载的官方模板
+## Use Another Official Template
 
-需要换用 Mind+ 官方模板的其他版本时，可以手动下载并解压，然后运行：
+To use a different version of the official Mind+ template, download and extract it, then run:
 
 ```powershell
 powershell -ExecutionPolicy Bypass -File .\extension-builder\build-extension.ps1 `
   -TemplatePath C:\path\to\mindplus-ext2-builder
 ```
 
-## 构建你自己的扩展
+## Build Your Own Extension
 
-先复制空白模板：
+First copy the blank template:
 
 ```powershell
 Copy-Item .\extension-builder\templates\blank-extension .\my-extension -Recurse
 ```
 
-按教程修改 `my-extension` 中的文件，然后运行：
+Edit the files in `my-extension`, then run:
 
 ```powershell
 powershell -ExecutionPolicy Bypass -File .\extension-builder\build-extension.ps1 `
   -ExtensionPath .\my-extension
 ```
 
-脚本会从用户扩展的 `public/config.json` 自动读取 `author`、`id` 和 `version`，所以不需要修改打包脚本。详细编写方法见 [`docs/develop-your-extension.md`](docs/develop-your-extension.md)。
+The script reads `author`, `id`, and `version` from the extension's `public/config.json`, so the packaging script itself does not need to be changed. See [`docs/develop-your-extension.md`](docs/develop-your-extension.md) for the detailed development guide.
 
-## 修改扩展
+## Modify the Extension
 
-- 扩展信息和版本号：`source/extension/public/config.json`
-- 积木定义：`source/extension/index.js`
-- Python 代码生成：`source/extension/func.js`
-- 中英文翻译：`source/extension/locales/`
-- BPX Python SDK：`source/extension/public/libraries/bpx_sdk/`
-- BPX 动作封装：`source/extension/public/libraries/bpx_sdk/mindplus_control.py`
+- Extension metadata and version: `source/extension/public/config.json`
+- Block definitions: `source/extension/index.js`
+- Python code generation: `source/extension/func.js`
+- Localized text: `source/extension/locales/`
+- BPX Python SDK: `source/extension/public/libraries/bpx_sdk/`
+- BPX motion wrappers: `source/extension/public/libraries/bpx_sdk/mindplus_control.py`
 
-修改后重新运行打包脚本。不要手工修改 `.work/` 或 `dist/` 中的文件，因为它们会在下次构建时重新生成。
+Run the build script again after making changes. Do not edit files in `.work/` or `dist/` manually because they are regenerated by the next build.
 
+## Release
 
+The `dist/` directory is not committed to Git. After testing, create the matching GitHub Release and upload the generated ZIP as a Release Asset.
