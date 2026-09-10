@@ -158,17 +158,33 @@ class MindPlusControl:
             raise
 
     def jump(self, method, target_sub):
-        """Trigger one jump request and wait for the SDK feedback to accept it."""
+        """One request, with preparation and observation matching the SDK example."""
+        if (method, target_sub) not in (("setUpJump", 0), ("setFrontJump", 1),
+                                      ("setBackJump", 2), ("setLeftJump", -1),
+                                      ("setRightJump", -2)):
+            raise ValueError("Unsupported BPX jump.")
+        if not callable(getattr(self.require(), method, None)):
+            raise RuntimeError("BPX jump requires the bundled SDK 1.0.9. Reload the extension and restart Python.")
+        if self.call("getCurrentMotionState") != 6:
+            raise RuntimeError("Use BPX stand up before jumping.")
         try:
-            self.stop()
+            self.call("setWalk")
+            self.call("setVelocityControlFlag", True)
+            self.repeat_for("setVelocity", 2.0, 0.0, 0.0, 0.0)
+            if self.call("getCurrentMotionState") != 6:
+                raise RuntimeError("BPX left motion mode before jump.")
             self.call(method)
             deadline = time.monotonic() + 5.0
-            while True:
+            observed = False
+            while time.monotonic() < deadline:
                 if self.call("getCurrentGait") == 12 and self.sub_gait() == target_sub:
-                    return
-                if time.monotonic() >= deadline:
-                    raise RuntimeError("BPX jump confirmation timed out: " + method)
-                time.sleep(self.INTERVAL)
+                    observed = True
+                time.sleep(0.02)
+            # Feedback confirms the selected gait, not physical landing/completion.
+            self.call("setWalk")
+            self.stop()
+            if not observed:
+                raise RuntimeError("BPX jump feedback not observed; check the robot. Do not automatically retry.")
         except BaseException:
             self.best_effort_stop()
             raise
