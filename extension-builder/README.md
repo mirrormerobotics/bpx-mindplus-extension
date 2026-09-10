@@ -49,7 +49,7 @@ The script will:
 With no arguments, the bundled BPX example is built. The default output is:
 
 ```text
-extension-builder/dist/MindPlus-extension-mirrormerobotics-bpxRobot-v0.1.3.zip
+extension-builder/dist/MindPlus-extension-mirrormerobotics-bpxRobot-v0.1.4.zip
 ```
 
 Extract the ZIP and select this file in Mind+ **Load Test Extension**:
