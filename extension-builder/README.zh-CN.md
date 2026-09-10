@@ -49,13 +49,13 @@ powershell -ExecutionPolicy Bypass -File .\extension-builder\build-extension.ps1
 不传参数时构建保留的 BPX 示例。默认成果物：
 
 ```text
-extension-builder/dist/MindPlus-extension-mirrormerobotics-bpxRobot-v0.1.3.zip
+extension-builder/dist/MindPlus-extension-mirrormerobotics-bpxRobot-v0.1.4.zip
 ```
 
 解压后选择下面的文件，即可在 Mind+ 的“加载测试扩展”中导入：
 
 ```text
-ext-mirrormerobotics-bpxRobot@0.1.3/config.json
+ext-mirrormerobotics-bpxRobot@0.1.4/config.json
 ```
 
 ## 使用已经下载的官方模板
