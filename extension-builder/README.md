@@ -55,7 +55,7 @@ extension-builder/dist/MindPlus-extension-mirrormerobotics-bpxRobot-v0.1.4.zip
 Extract the ZIP and select this file in Mind+ **Load Test Extension**:
 
 ```text
-ext-mirrormerobotics-bpxRobot@0.1.3/config.json
+ext-mirrormerobotics-bpxRobot@0.1.4/config.json
 ```
 
 ## Use Another Official Template
