@@ -25,5 +25,10 @@
   "bpx.imuPitch": "Emplacement BPX IMU",
   "bpx.imuYaw": "BPX IMU lacet",
   "bpx.motionState": "État de mouvement BPX",
-  "bpx.currentGait": "Démarche actuelle BPX"
+  "bpx.currentGait": "Démarche actuelle BPX",
+  "bpx.jumpLeft": "BPX jump left",
+  "bpx.jumpBack": "BPX jump back",
+  "bpx.jumpUp": "BPX jump up",
+  "bpx.jumpRight": "BPX jump right",
+  "bpx.jumpFront": "BPX jump front"
 }

@@ -25,5 +25,10 @@
   "bpx.imuPitch": "Rozteč BPX IMU",
   "bpx.imuYaw": "BPX IMU vybočit",
   "bpx.motionState": "Stav pohybu BPX",
-  "bpx.currentGait": "BPX aktuální chůze"
+  "bpx.currentGait": "BPX aktuální chůze",
+  "bpx.jumpLeft": "BPX jump left",
+  "bpx.jumpBack": "BPX jump back",
+  "bpx.jumpUp": "BPX jump up",
+  "bpx.jumpRight": "BPX jump right",
+  "bpx.jumpFront": "BPX jump front"
 }

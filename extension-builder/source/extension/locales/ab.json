@@ -25,5 +25,10 @@
   "bpx.imuPitch": "БПХ ИМУ ашьҭыбжь",
   "bpx.imuYaw": "БПХ ИМУ аиоу",
   "bpx.motionState": "BPX аныҟәара аҭагылазаашьа",
-  "bpx.currentGait": "BPX уажәтәи аныҟәара"
+  "bpx.currentGait": "BPX уажәтәи аныҟәара",
+  "bpx.jumpLeft": "BPX jump left",
+  "bpx.jumpBack": "BPX jump back",
+  "bpx.jumpUp": "BPX jump up",
+  "bpx.jumpRight": "BPX jump right",
+  "bpx.jumpFront": "BPX jump front"
 }

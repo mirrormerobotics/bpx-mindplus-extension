@@ -25,5 +25,10 @@
   "bpx.imuPitch": "BPX IMU მოედანი",
   "bpx.imuYaw": "BPX IMU yaw",
   "bpx.motionState": "BPX მოძრაობის მდგომარეობა",
-  "bpx.currentGait": "BPX მიმდინარე სიარული"
+  "bpx.currentGait": "BPX მიმდინარე სიარული",
+  "bpx.jumpLeft": "BPX jump left",
+  "bpx.jumpBack": "BPX jump back",
+  "bpx.jumpUp": "BPX jump up",
+  "bpx.jumpRight": "BPX jump right",
+  "bpx.jumpFront": "BPX jump front"
 }

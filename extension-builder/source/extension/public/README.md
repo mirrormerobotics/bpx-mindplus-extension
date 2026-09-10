@@ -2,7 +2,8 @@
 
 English | [中文](README.zh-CN.md)
 
-This extension uses the BPX SDK 1.0.8 Windows wheels provided by the public [`mirrormerobotics/bpx_sdk_open`](https://github.com/mirrormerobotics/bpx_sdk_open) repository.
+This extension uses the BPX SDK 1.0.8 Windows wheels provided by the public [`mirrormerobotics/bpx_sdk_open`](https://github.com/mirrormerobotics/bpx_sdk_open) repository. It does not read any repository from the user's desktop.
+
 ## Python Compatibility
 
 - 64-bit Windows

@@ -25,5 +25,10 @@
   "bpx.imuPitch": "BPX IMU 俯仰角",
   "bpx.imuYaw": "BPX IMU 偏航角",
   "bpx.motionState": "BPX 當前運動狀態",
-  "bpx.currentGait": "BPX 當前步態"
+  "bpx.currentGait": "BPX 當前步態",
+  "bpx.jumpLeft": "BPX jump left",
+  "bpx.jumpBack": "BPX jump back",
+  "bpx.jumpUp": "BPX jump up",
+  "bpx.jumpRight": "BPX jump right",
+  "bpx.jumpFront": "BPX jump front"
 }

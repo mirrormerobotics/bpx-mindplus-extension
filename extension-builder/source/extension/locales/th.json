@@ -25,5 +25,10 @@
   "bpx.imuPitch": "สนาม BPX IMU",
   "bpx.imuYaw": "BPX IMU หันเห",
   "bpx.motionState": "สถานะการเคลื่อนที่ของ BPX",
-  "bpx.currentGait": "การเดินปัจจุบันของ BPX"
+  "bpx.currentGait": "การเดินปัจจุบันของ BPX",
+  "bpx.jumpLeft": "BPX jump left",
+  "bpx.jumpBack": "BPX jump back",
+  "bpx.jumpUp": "BPX jump up",
+  "bpx.jumpRight": "BPX jump right",
+  "bpx.jumpFront": "BPX jump front"
 }

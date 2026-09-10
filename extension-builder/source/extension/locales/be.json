@@ -25,5 +25,10 @@
   "bpx.imuPitch": "Крок BPX IMU",
   "bpx.imuYaw": "BPX IMU рысканне",
   "bpx.motionState": "Стан руху BPX",
-  "bpx.currentGait": "Бягучая хада BPX"
+  "bpx.currentGait": "Бягучая хада BPX",
+  "bpx.jumpLeft": "BPX jump left",
+  "bpx.jumpBack": "BPX jump back",
+  "bpx.jumpUp": "BPX jump up",
+  "bpx.jumpRight": "BPX jump right",
+  "bpx.jumpFront": "BPX jump front"
 }

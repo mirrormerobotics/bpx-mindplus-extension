@@ -25,5 +25,10 @@
   "bpx.imuPitch": "الملعب BPX IMU",
   "bpx.imuYaw": "BPX IMU ياو",
   "bpx.motionState": "حالة حركة BPX",
-  "bpx.currentGait": "مشية BPX الحالية"
+  "bpx.currentGait": "مشية BPX الحالية",
+  "bpx.jumpLeft": "BPX jump left",
+  "bpx.jumpBack": "BPX jump back",
+  "bpx.jumpUp": "BPX jump up",
+  "bpx.jumpRight": "BPX jump right",
+  "bpx.jumpFront": "BPX jump front"
 }

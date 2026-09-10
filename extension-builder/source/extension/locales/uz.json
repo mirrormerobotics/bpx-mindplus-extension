@@ -25,5 +25,10 @@
   "bpx.imuPitch": "BPX IMU balandligi",
   "bpx.imuYaw": "BPX IMU yaw",
   "bpx.motionState": "BPX harakat holati",
-  "bpx.currentGait": "BPX joriy yurishi"
+  "bpx.currentGait": "BPX joriy yurishi",
+  "bpx.jumpLeft": "BPX jump left",
+  "bpx.jumpBack": "BPX jump back",
+  "bpx.jumpUp": "BPX jump up",
+  "bpx.jumpRight": "BPX jump right",
+  "bpx.jumpFront": "BPX jump front"
 }

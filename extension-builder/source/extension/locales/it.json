@@ -25,5 +25,10 @@
   "bpx.imuPitch": "Passo IMU BPX",
   "bpx.imuYaw": "BPX IMU imbardata",
   "bpx.motionState": "Stato di movimento BPX",
-  "bpx.currentGait": "Andatura corrente BPX"
+  "bpx.currentGait": "Andatura corrente BPX",
+  "bpx.jumpLeft": "BPX jump left",
+  "bpx.jumpBack": "BPX jump back",
+  "bpx.jumpUp": "BPX jump up",
+  "bpx.jumpRight": "BPX jump right",
+  "bpx.jumpFront": "BPX jump front"
 }

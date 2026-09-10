@@ -1,4 +1,4 @@
-"""Mind+ 0.1.3 synchronous helpers. No automatic reconnect or calibration retry."""
+"""Mind+ 0.1.4 synchronous helpers. No automatic reconnect or calibration retry."""
 import math
 import time
 
@@ -154,6 +154,22 @@ class MindPlusControl:
                 self.call("setWalk")
             except Exception:
                 pass
+            self.best_effort_stop()
+            raise
+
+    def jump(self, method, target_sub):
+        """Trigger one jump request and wait for the SDK feedback to accept it."""
+        try:
+            self.stop()
+            self.call(method)
+            deadline = time.monotonic() + 5.0
+            while True:
+                if self.call("getCurrentGait") == 12 and self.sub_gait() == target_sub:
+                    return
+                if time.monotonic() >= deadline:
+                    raise RuntimeError("BPX jump confirmation timed out: " + method)
+                time.sleep(self.INTERVAL)
+        except BaseException:
             self.best_effort_stop()
             raise
 

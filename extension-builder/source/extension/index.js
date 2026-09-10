@@ -38,6 +38,11 @@ class ExtensionBPX {
                     ['pronkGait', 'BPX use pronk gait'],
                     ['leftFlip', 'BPX left flip (trigger once)'],
                     ['rightFlip', 'BPX right flip (trigger once)'],
+                    ['jumpUp', 'BPX jump up'],
+                    ['jumpFront', 'BPX jump front'],
+                    ['jumpBack', 'BPX jump back'],
+                    ['jumpLeft', 'BPX jump left'],
+                    ['jumpRight', 'BPX jump right'],
                 ].map(([opcode, label]) => ({
                     opcode,
                     blockType: BlockType.COMMAND,
@@ -66,7 +71,7 @@ class ExtensionBPX {
                     arguments: {
                         IP: {
                             type: ArgumentType.STRING,
-                            defaultValue: '10.21.20.1',
+                            defaultValue: '10.21.40.1',
                             inputParams: {symbol: '\"\"'}
                         }
                     }
@@ -165,7 +170,7 @@ class ExtensionBPX {
                 const order = ['connect', 'isConnected', 'disconnect', 'resetJoints',
                     'standUp', 'sitDown', 'damping', 'walkGait', 'runningGait',
                     'paceGait', 'boundGait', 'pronkGait', 'invBipedalGait', 'bipedalGait',
-                    'leftFlip', 'rightFlip', 'setVelocity', 'velocityFor', 'stop',
+                    'leftFlip', 'rightFlip', 'jumpUp', 'jumpFront', 'jumpBack', 'jumpLeft', 'jumpRight', 'setVelocity', 'velocityFor', 'stop',
                     'batteryLevel', 'imuRoll', 'imuPitch', 'imuYaw', 'motionState',
                     'currentGait', 'subGait'];
                 return order.indexOf(a.opcode) - order.indexOf(b.opcode);

@@ -4,7 +4,7 @@
 
 此扩展使用公开仓库
 [`mirrormerobotics/bpx_sdk_open`](https://github.com/mirrormerobotics/bpx_sdk_open)
-提供的 BPX SDK 1.0.8 Windows wheels。
+提供的 BPX SDK 1.0.8 Windows wheels，不读取任何用户桌面仓库。
 
 ## Python 兼容范围
 

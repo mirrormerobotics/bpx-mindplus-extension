@@ -136,6 +136,31 @@ class Func {
         return 'MindPlusControl(_bpx_require()).flip("setRightFlip", -2)';
     }
 
+    jumpUp(generator) {
+        this._addCore(generator);
+        return 'MindPlusControl(_bpx_require()).jump("setUpJump", 0)';
+    }
+
+    jumpFront(generator) {
+        this._addCore(generator);
+        return 'MindPlusControl(_bpx_require()).jump("setFrontJump", 1)';
+    }
+
+    jumpBack(generator) {
+        this._addCore(generator);
+        return 'MindPlusControl(_bpx_require()).jump("setBackJump", 2)';
+    }
+
+    jumpLeft(generator) {
+        this._addCore(generator);
+        return 'MindPlusControl(_bpx_require()).jump("setLeftJump", -1)';
+    }
+
+    jumpRight(generator) {
+        this._addCore(generator);
+        return 'MindPlusControl(_bpx_require()).jump("setRightJump", -2)';
+    }
+
     subGait(generator) {
         this._addCore(generator);
         return ['MindPlusControl(_bpx_require()).sub_gait()', generator.ORDER_ATOMIC];

@@ -25,5 +25,10 @@
   "bpx.imuPitch": "BPX IMU давтамж",
   "bpx.imuYaw": "BPX IMU хазайлаа",
   "bpx.motionState": "BPX хөдөлгөөний төлөв",
-  "bpx.currentGait": "BPX одоогийн алхалт"
+  "bpx.currentGait": "BPX одоогийн алхалт",
+  "bpx.jumpLeft": "BPX jump left",
+  "bpx.jumpBack": "BPX jump back",
+  "bpx.jumpUp": "BPX jump up",
+  "bpx.jumpRight": "BPX jump right",
+  "bpx.jumpFront": "BPX jump front"
 }
