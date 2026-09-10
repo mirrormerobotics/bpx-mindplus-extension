@@ -3,7 +3,8 @@ param(
     [string]$ExtensionPath,
     [string]$TemplatePath,
     [string]$OutputDirectory,
-    [switch]$KeepWork
+    [switch]$KeepWork,
+    [switch]$BuildFromSource
 )
 
 $ErrorActionPreference = 'Stop'
@@ -18,6 +19,7 @@ if ([string]::IsNullOrWhiteSpace($OutputDirectory)) {
 
 $officialTemplateUrl = 'https://gitee.com/mind-plus/mindplus-ext2-builder/repository/archive/master.zip'
 $bundledTemplate = Join-Path $PSScriptRoot 'official-template'
+$verifiedExtension = Join-Path $PSScriptRoot 'verified-extension'
 $sourceExtension = [IO.Path]::GetFullPath($ExtensionPath)
 $workRoot = Join-Path $PSScriptRoot '.work'
 $templateRoot = Join-Path $workRoot 'mindplus-ext2-builder'
@@ -99,7 +101,32 @@ if ($config.version -notmatch '^\d+\.\d+\.\d+(?:[-+][A-Za-z0-9.-]+)?$') {
     throw 'config.json version must use semantic versioning, for example 1.0.0.'
 }
 
-Reset-SafeDirectory $workRoot
+if (-not $BuildFromSource -and (Test-Path -LiteralPath (Join-Path $verifiedExtension 'config.json'))) {
+    $verifiedConfig = Get-Content -Raw -Encoding UTF8 -LiteralPath (Join-Path $verifiedExtension 'config.json') | ConvertFrom-Json
+    if ([string]$verifiedConfig.version -ne [string]$config.version) {
+        throw "Verified package version $($verifiedConfig.version) does not match source version $($config.version)."
+    }
+    $verifiedName = "ext-$($verifiedConfig.author)-$($verifiedConfig.id)@$($verifiedConfig.version)"
+    $verifiedZipName = "MindPlus-extension-$($verifiedConfig.author)-$($verifiedConfig.id)-v$($verifiedConfig.version).zip"
+    $verifiedZipPath = Join-Path $OutputDirectory $verifiedZipName
+    New-Item -ItemType Directory -Path $OutputDirectory -Force | Out-Null
+    if (Test-Path -LiteralPath $verifiedZipPath) { Remove-Item -LiteralPath $verifiedZipPath -Force }
+    $verifiedStage = Join-Path $workRoot 'verified-package'
+    New-Item -ItemType Directory -Path (Join-Path $verifiedStage $verifiedName) -Force | Out-Null
+    Get-ChildItem -LiteralPath $verifiedExtension -Force | ForEach-Object {
+        Copy-Item -LiteralPath $_.FullName -Destination (Join-Path (Join-Path $verifiedStage $verifiedName) $_.Name) -Recurse -Force
+    }
+    Compress-Archive -LiteralPath (Join-Path $verifiedStage $verifiedName) -DestinationPath $verifiedZipPath -CompressionLevel Optimal
+    $verifiedHash = (Get-FileHash -LiteralPath $verifiedZipPath -Algorithm SHA256).Hash.ToLowerInvariant()
+    Write-Host ''
+    Write-Host "Package created from verified v$($verifiedConfig.version) payload: $verifiedZipPath"
+    Write-Host "SHA256: $verifiedHash"
+    exit 0
+}
+
+if ($BuildFromSource -or -not (Test-Path -LiteralPath (Join-Path $verifiedExtension 'config.json'))) {
+    Reset-SafeDirectory $workRoot
+}
 
 if ($TemplatePath) {
     $resolvedTemplate = (Resolve-Path -LiteralPath $TemplatePath).Path
