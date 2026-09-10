@@ -73,7 +73,7 @@ If this setting is unavailable, update Mind+ and reopen the application.
 
 ## 4. Load the BPX Python Block Extension
 
-1. Download `MindPlus-extension-mirrormerobotics-bpxRobot-v0.1.3.zip` from the [v0.1.3 release](https://github.com/mirrormerobotics/bpx-mindplus-extension/releases/tag/v0.1.3), then extract the complete ZIP.
+1. Download `MindPlus-extension-mirrormerobotics-bpxRobot-v0.1.4.zip` from the [v0.1.4 release](https://github.com/mirrormerobotics/bpx-mindplus-extension/releases/tag/v0.1.4), then extract the complete ZIP.
 2. Click **Load Test Extension** in the lower-left corner of the extension page.
 3. Select `config.json` from the extracted directory.
 4. After loading, a **BPX Robot** card marked **Test** appears on the extension page.
@@ -122,7 +122,7 @@ First build a program that reads the battery level without commanding robot moti
 
 ## 8. Common Blocks and Usage
 
-The following examples use extension version 0.1.3. Each image shows a separate program. Replace the example IP with the actual robot IP.
+The following examples use extension version 0.1.4. Each image shows a separate program. Replace the example IP with the actual robot IP.
 
 
 
