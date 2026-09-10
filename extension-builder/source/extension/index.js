@@ -71,7 +71,7 @@ class ExtensionBPX {
                     arguments: {
                         IP: {
                             type: ArgumentType.STRING,
-                            defaultValue: '10.21.20.1',
+                            defaultValue: '10.21.40.1',
                             inputParams: {symbol: '\"\"'}
                         }
                     }
@@ -181,3 +181,4 @@ class ExtensionBPX {
 }
 
 export default ExtensionBPX;
+
