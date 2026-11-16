@@ -133,7 +133,7 @@
     "zh-cn": "通过 Python 积木连接、控制 BPX 四足机器人并读取状态",
     "zh-tw": "透過 Python 積木連接、控制 BPX 四足機器人並讀取狀態"
   },
-  "author": "mirrormerobotics",
+  "author": "M1chael0919",
   "cover": "cover.png",
   "main": "main.js",
   "isDevice": false,
