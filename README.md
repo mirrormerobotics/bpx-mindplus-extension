@@ -14,6 +14,8 @@ The current BPX Mind+ Python block extension supports:
 
 Linux and macOS are not currently supported.
 
+The extension bundles [BPX SDK 1.0.9](https://github.com/mirrormerobotics/bpx_sdk_open) for 64-bit Windows CPython 3.8–3.14. The SDK selects the native module for the running Python version. 32-bit Python and PyPy are unsupported.
+
 ## 1. Prepare the Robot and Network
 
 1. Turn on the BPX robot.
@@ -188,7 +190,7 @@ Run this action only with sufficient clear space and appropriate safety precauti
 
 ## Extension Development and Packaging
 
-This repository follows the [Mind+ V2 builder layout](https://gitee.com/mind-plus/mindplus-ext2-builder). Build files are at the repository root and BPX source is in [`extension/`](extension/).
+This repository follows the [Mind+ V2 builder layout](https://gitee.com/mind-plus/mindplus-ext2-builder). Build files are at the repository root and BPX source is in [`extension/`](extension/). The upstream builder's MIT license is in [LICENSE-MINDPLUS](LICENSE-MINDPLUS).
 
 With Node.js and npm installed, run these commands from the repository root:
 
@@ -197,14 +199,10 @@ npm ci
 npm run build
 ```
 
-In Mind+, load `build/ext-M1chael0919-bpxRobot@0.1.4/config.json` as a test extension. For ZIP packaging, see the [packaging guide](extension-builder/README.md).
+In Mind+, load `build/ext-M1chael0919-bpxRobot@0.1.4/config.json` as a test extension. Keep the complete build output directory together.
 
-## SDK Submodule
+To create a ZIP in PowerShell after building:
 
-This repository includes the official [mirrormerobotics/bpx_sdk_open](https://github.com/mirrormerobotics/bpx_sdk_open) SDK as a Git submodule at `libraries/bpx_sdk_open`.
-
-Clone the repository with:
-
-```bash
-git clone --recurse-submodules https://github.com/mirrormerobotics/bpx-mindplus-extension.git
+```powershell
+Compress-Archive -LiteralPath 'build/ext-M1chael0919-bpxRobot@0.1.4' -DestinationPath 'build/MindPlus-extension-M1chael0919-bpxRobot-v0.1.4.zip'
 ```

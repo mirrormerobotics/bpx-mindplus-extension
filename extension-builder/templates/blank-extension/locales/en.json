@@ -1,5 +1,0 @@
-{
-  "ext.helloExample.name": "My Extension",
-  "helloExample.sayHello": "print [TEXT]",
-  "helloExample.helloText": "hello text"
-}

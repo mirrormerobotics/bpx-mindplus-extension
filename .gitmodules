@@ -1,3 +1,0 @@
-[submodule "libraries/bpx_sdk_open"]
-	path = libraries/bpx_sdk_open
-	url = https://github.com/mirrormerobotics/bpx_sdk_open.git

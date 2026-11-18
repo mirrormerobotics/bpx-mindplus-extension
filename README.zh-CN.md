@@ -14,6 +14,8 @@ BPX 机器人扩展可通过 Mind+ V2 的 Python 积木连接并控制 BPX、读
 
 暂不支持 Linux 和 macOS。
 
+扩展内置 Windows 64 位版 [BPX SDK 1.0.9](https://github.com/mirrormerobotics/bpx_sdk_open)，支持 CPython 3.8–3.14。SDK 根据当前 Python 版本自动选择原生模块，不支持 32 位 Python 或 PyPy。
+
 ## 一、准备机器人和网络
 
 1. 打开 BPX 机器人电源。
@@ -196,7 +198,7 @@ BPX 停止移动
 
 ## 扩展开发与打包
 
-本仓库采用 [Mind+ V2 官方脚手架](https://gitee.com/mind-plus/mindplus-ext2-builder) 的结构。构建配置在仓库根目录，BPX 扩展源码在 [`extension/`](extension/)。
+本仓库采用 [Mind+ V2 官方脚手架](https://gitee.com/mind-plus/mindplus-ext2-builder) 的结构。构建配置在仓库根目录，BPX 扩展源码在 [`extension/`](extension/)。上游脚手架的 MIT 许可证见 [LICENSE-MINDPLUS](LICENSE-MINDPLUS)。
 
 安装 Node.js 和 npm 后，在仓库根目录执行：
 
@@ -205,14 +207,10 @@ npm ci
 npm run build
 ```
 
-在 Mind+ 中选择 `build/ext-M1chael0919-bpxRobot@0.1.4/config.json` 加载测试扩展。需要生成 ZIP 时，参见[打包指南](extension-builder/README.zh-CN.md)。
+在 Mind+ 中选择 `build/ext-M1chael0919-bpxRobot@0.1.4/config.json` 加载测试扩展。请保留完整的构建产物目录。
 
-## SDK 子模块
+构建完成后，在 PowerShell 中执行以下命令生成 ZIP：
 
-本仓库通过 Git 子模块引用官方 SDK：[mirrormerobotics/bpx_sdk_open](https://github.com/mirrormerobotics/bpx_sdk_open)，路径为 `libraries/bpx_sdk_open`。
-
-克隆仓库时请使用：
-
-```bash
-git clone --recurse-submodules https://github.com/mirrormerobotics/bpx-mindplus-extension.git
+```powershell
+Compress-Archive -LiteralPath 'build/ext-M1chael0919-bpxRobot@0.1.4' -DestinationPath 'build/MindPlus-extension-M1chael0919-bpxRobot-v0.1.4.zip'
 ```
