@@ -2,6 +2,8 @@
 
 [English](README.md) | 中文
 
+BPX 机器人扩展可通过 Mind+ V2 的 Python 积木连接并控制 BPX、读取状态。参见[积木概览](#五确认-bpx-积木已经出现)和[示例程序](#八常用积木及用法)。
+
 ## 适用环境
 
 本仓库当前发布的 BPX Mind+ Python 积木扩展包仅支持：
@@ -187,16 +189,23 @@ BPX 停止移动
 仅在有足够空间和安全保障的条件下操作。
 
 
+## 更新日志
+
+- **0.1.4**：随包提供 Windows 版 BPX SDK 1.0.9，并更新中文积木标签。
+- **仓库结构**：将构建文件移至根目录，BPX 扩展源码放在 `extension/`。
+
 ## 扩展开发与打包
 
-如果想开发自己的 Mind+ 扩展，本仓库的 `extension-builder` 目录提供了通用的 Mind+ V2 扩展打包工具，并保留 BPX 扩展作为完整示例。
+本仓库采用 [Mind+ V2 官方脚手架](https://gitee.com/mind-plus/mindplus-ext2-builder) 的结构。构建配置在仓库根目录，BPX 扩展源码在 [`extension/`](extension/)。
 
-它可以用于：
+安装 Node.js 和 npm 后，在仓库根目录执行：
 
-- 重新打包 BPX 扩展
-- 修改或增加 BPX 积木
-- 复制空白模板，开发其他 Mind+ 扩展
-- 将扩展源码打包成 Mind+ 可以加载的 ZIP 文件
+```sh
+npm ci
+npm run build
+```
+
+在 Mind+ 中选择 `build/ext-M1chael0919-bpxRobot@0.1.4/config.json` 加载测试扩展。需要生成 ZIP 时，参见[打包指南](extension-builder/README.zh-CN.md)。
 
 ## SDK 子模块
 

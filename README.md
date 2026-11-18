@@ -2,6 +2,8 @@
 
 English | [中文](README.zh-CN.md)
 
+The BPX Robot extension connects to BPX, controls it, and reads its state from Mind+ V2 Python blocks. See the [block overview](#5-confirm-that-the-bpx-blocks-are-available) and [example programs](#8-common-blocks-and-usage).
+
 ## Supported Environment
 
 The current BPX Mind+ Python block extension supports:
@@ -179,16 +181,23 @@ A right-side flip can be arranged as follows:
 
 Run this action only with sufficient clear space and appropriate safety precautions.
 
+## Changelog
+
+- **0.1.4**: Bundles BPX SDK 1.0.9 for Windows and updates Chinese block labels.
+- **Repository layout**: Moves the build files to the root and places BPX source in `extension/`.
+
 ## Extension Development and Packaging
 
-The `extension-builder` directory provides a general-purpose Mind+ V2 extension packaging tool and retains the BPX extension as a complete example.
+This repository follows the [Mind+ V2 builder layout](https://gitee.com/mind-plus/mindplus-ext2-builder). Build files are at the repository root and BPX source is in [`extension/`](extension/).
 
-It can be used to:
+With Node.js and npm installed, run these commands from the repository root:
 
-- Rebuild the BPX extension
-- Modify or add BPX blocks
-- Copy the blank template to develop another Mind+ extension
-- Package extension source into a ZIP that Mind+ can load
+```sh
+npm ci
+npm run build
+```
+
+In Mind+, load `build/ext-M1chael0919-bpxRobot@0.1.4/config.json` as a test extension. For ZIP packaging, see the [packaging guide](extension-builder/README.md).
 
 ## SDK Submodule
 

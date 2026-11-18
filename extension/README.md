@@ -14,4 +14,4 @@ The extension package contains a native `.pyd` for every supported CPython versi
 
 ## Load as a Test Extension in Mind+
 
-Enable Extension Developer Mode in Mind+ Python Block Mode, then select `config.json` from this directory. Keep `config.json`, `main.js`, `requirements.txt`, and the complete `libraries/bpx_sdk` directory together. Do not copy only `config.json`.
+Build the extension from the [repository root](../README.md#extension-development-and-packaging). In Mind+ Python Block Mode, enable Extension Developer Mode and select `config.json` from the generated extension directory. Keep the complete generated directory together.

@@ -17,6 +17,6 @@
 
 ## Mind+ 测试加载
 
-在 Mind+ Python 积木模式启用扩展库开发者模式，然后选择本目录中的
-`config.json`。必须保留 `config.json`、`main.js`、`requirements.txt` 和
-整个 `libraries/bpx_sdk` 目录，不能只复制 `config.json`。
+从[仓库根目录](../README.zh-CN.md#扩展开发与打包)构建扩展。在 Mind+ Python
+积木模式启用扩展库开发者模式，然后选择构建产物中的 `config.json`。
+请保留完整的构建产物目录。
